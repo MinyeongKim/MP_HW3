@@ -44,13 +44,13 @@ public class MainActivity extends AppCompatActivity {
     public class DogThread extends Thread{
         int imageIndex;
         int state;
-        ArrayList<Integer> images = new ArrayList<Integer>(); //이미지들을 넣을 ArrayList
+        ArrayList<Integer> images = new ArrayList<Integer>();
 
-        //DogThread 초기화
+        //DogThread Constructor
         public DogThread(int idx){
             imageIndex = idx;
 
-            //images에 dog image 넣기
+            //Insert dog images into the images list
             images.add(R.drawable.dog1);
             images.add(R.drawable.dog2);
             images.add(R.drawable.dog3);
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         public void run(){
             state = 0;
             while(true){
-                //handler 객체를 사용하여 Runnable 객체를 post
+                //Post a Runnable using a handler
                 handler.post(new Runnable(){
                    public void run(){
                        //Check the image Index and Load image that fits state value
@@ -80,11 +80,12 @@ public class MainActivity extends AppCompatActivity {
                 } catch (Exception ex) {}
 
                 state++; //Change state
-                if(state == images.size()) //state가 images의 길이와 같으면, state를 0으로 초기화
+                if(state == images.size()) //If the state is equal to the length of the images, reset the state to zero
                     state = 0;
             }
         }
 
+        //Get Random Time between min and max
         public int getRandomTime(int min, int max){
             return min+(int)(Math.random()*(max-min));
         }
